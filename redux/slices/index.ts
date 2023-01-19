@@ -1,6 +1,2 @@
-import pageProps from './pageProps';
-
-const indexedVariable = {
-  pageProps,
-};
+const indexedVariable = {};
 export default indexedVariable;
