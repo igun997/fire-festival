@@ -1,3 +1,3 @@
 include:
   - project: 'cipta-dua-saudara/cicd'
-    file: 'fastwork-wedding-fe.yml'
+    file: 'fire-festival-fe.yml'
