@@ -13,8 +13,6 @@ import { ConfigProvider } from 'antd';
 import BaseLayout from '../components/Layout';
 import Head from 'next/head';
 import PlainLayout from '../components/PlainLayout';
-import { BrowserTracing } from '@sentry/tracing';
-import { CURRENT_ENV, SENTRY_DSN } from '../constants/http.constant';
 import '/assets/less/ant-custom.less';
 
 let persistor = persistStore(storeConfig);
@@ -35,12 +33,12 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>{_title}</title>
+                {/*<title>{_title}</title>*/}
                 <meta name="description" content={_description} />
                 <meta name="keywords" content={`${_title} - ${_siteName}`} />
                 <link rel="manifest" href="/manifest.json" />
-                <link rel="shortcut icon" href="/icons/icon-192x192.png" type="image/png" />
-                <link rel="icon" href="/favicon.png" type="image/png" />
+                {/*<link rel="shortcut icon" href="/icons/icon-192x192.png" type="image/png" />*/}
+                {/*<link rel="icon" href="/favicon.png" type="image/png" />*/}
                 <meta name="theme-color" content="#075E54" />
                 <meta property="og:title" content={_title} />
                 <meta property="og:description" content={_description} />

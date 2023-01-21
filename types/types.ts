@@ -13,6 +13,10 @@ export namespace Resources {
     path: string;
     url: string;
   };
+  export type DefaultResponse = {
+    id: number;
+    attributes: any;
+  };
   export type MediaAttributes = {
     name: string;
     alternativeText: string;

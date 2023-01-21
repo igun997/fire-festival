@@ -167,3 +167,10 @@ export const hexToRgb = (hex: string) => {
       }
     : null;
 };
+
+export const pathToAsset = (path: string | undefined) => {
+  if (path === undefined) {
+    return null;
+  }
+  return `${process.env.NEXT_PUBLIC_ASSET_PREFIX}${path}`;
+};
