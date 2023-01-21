@@ -47,4 +47,67 @@ export namespace RootResources {
       }[];
     };
   }
+
+  export namespace getStaticPage {
+    export type request = {
+      slug: string;
+    };
+    export type data = {
+      id: number;
+      title: string;
+      description: string;
+      config: {
+        id: number;
+        name: string;
+        layout: any;
+      }[];
+      slug: string;
+      footer_text: string | null;
+      footer_image: {
+        data: {
+          id: number;
+          attributes: Resources.MediaAttributes;
+        }[];
+      };
+    };
+    export type response = {
+      data: {
+        id: number;
+        attributes: data;
+      }[];
+    };
+  }
+
+  export namespace getListEvent {
+    export type data = {
+      id: number;
+      event_name: string;
+      slug: string;
+      is_contact: boolean;
+      icon: {
+        data: {
+          id: number;
+          attributes: Resources.MediaAttributes;
+        };
+      };
+      event_info: {
+        id: number;
+        title: string;
+        description: string;
+        layout: string;
+        medias: {
+          data: {
+            id: number;
+            attributes: Resources.MediaAttributes;
+          }[];
+        };
+      };
+    };
+    export type response = {
+      data: {
+        id: number;
+        attributes: data;
+      }[];
+    };
+  }
 }

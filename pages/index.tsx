@@ -30,7 +30,7 @@ const Home: LayoutConfigWithNextPage = (props: any) => {
     if (is_external) {
       return window.open(slug, '_blank');
     }
-    return router.push(`/${slug}`);
+    return router.push(`/static/${slug}`);
   };
   useEffect(() => {
     loadLanding();
@@ -102,7 +102,11 @@ const Home: LayoutConfigWithNextPage = (props: any) => {
               </Col>
             </Row>
           </Col>
-          <Col xs={24}>
+          <Col
+            xs={24}
+            style={{
+              paddingTop: 20,
+            }}>
             <Row gutter={[10, 10]}>
               {loadingLanding.loading ? (
                 <Col xs={24}>

@@ -1,12 +1,12 @@
 {
-  "theme_color": "#075E54",
+  "theme_color": "#800000",
   "background_color": "#ffffff",
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
-  "name": "MauKirim",
-  "short_name": "MauKirim",
-  "description": "Kirimkan pesanmu dengan maukirim.com",
+  "name": "Fire Safety Festival",
+  "short_name": "FSF",
+  "description": "Fire Safety Festival 2023",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",

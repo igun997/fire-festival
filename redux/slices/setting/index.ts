@@ -31,11 +31,25 @@ export const indexSlice = createSlice({
         state.setting.site_name = action.payload;
       }
     },
+    changeFooterText: (state, action: PayloadAction<string>) => {
+      if (state.setting) {
+        state.setting.footer_text = action.payload;
+      }
+    },
+    changeFooterImage: (
+      state,
+      action: PayloadAction<RootResources.getSetting.data['footer_image']>,
+    ) => {
+      if (state.setting) {
+        state.setting.footer_image = action.payload;
+      }
+    },
     clearSetting: (state) => {
       state.setting = null;
     },
   },
 });
 
-export const { addSetting, changeTitle, setLoading } = indexSlice.actions;
+export const { addSetting, changeTitle, changeFooterText, changeFooterImage, setLoading } =
+  indexSlice.actions;
 export default indexSlice.reducer;

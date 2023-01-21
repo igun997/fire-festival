@@ -17,3 +17,27 @@ export const getListLanding = () => {
     return response.data as RootResources.getListLanding.response;
   });
 };
+
+// pages?populate=*&filters[slug][$eq]=festival
+
+export const getStaticPage = (slug: string) => {
+  return http.get(`/pages?populate=*&filters[slug][$eq]=${slug}`).then((response) => {
+    return response.data as RootResources.getStaticPage.response;
+  });
+};
+
+// events?populate=*
+
+export const getListEvent = () => {
+  return http.get('/events?populate=*').then((response) => {
+    return response.data as RootResources.getListEvent.response;
+  });
+};
+
+// events?populate=*&filters[slug][$eq]=ngodi
+
+export const getEventDetail = (slug: string) => {
+  return http.get(`/events?populate=deep&filters[slug][$eq]=${slug}`).then((response) => {
+    return response.data as RootResources.getListEvent.response;
+  });
+};
