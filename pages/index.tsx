@@ -1,6 +1,6 @@
 import { LayoutConfigWithNextPage } from '../configs/layout.config';
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Grid, Image, Row, Space, Typography } from 'antd';
+import { Card, Col, Grid, Image, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import style from './index.module.less';
 import { useAppSelector } from '../configs/hooks.config';
@@ -55,44 +55,26 @@ const Home: LayoutConfigWithNextPage = (props: any) => {
               textAlign: 'center',
             }}>
             <Row gutter={[10, 10]} justify="space-between" align="middle">
-              {xs && (
-                <Col xs={24}>
-                  <Image
-                    style={{
-                      height: 80,
-                      width: 'auto',
-                      verticalAlign: 'middle',
-                    }}
-                    src={
-                      pathToAsset(
-                        setting?.logo?.data?.attributes?.formats?.small?.url ??
-                          setting?.logo?.data?.attributes?.url,
-                      ) ?? ''
-                    }
-                    preview={false}
-                  />
-                </Col>
-              )}
+              <Col xs={24}>
+                <Image
+                  style={{
+                    height: 80,
+                    width: 'auto',
+                    verticalAlign: 'middle',
+                  }}
+                  src={
+                    pathToAsset(
+                      setting?.logo?.data?.attributes?.formats?.small?.url ??
+                        setting?.logo?.data?.attributes?.url,
+                    ) ?? ''
+                  }
+                  preview={false}
+                />
+              </Col>
               <Col xs={24}>
                 {!xs ? (
                   <Typography.Title className="landing-heading" level={2}>
-                    <Space direction="horizontal">
-                      <Image
-                        style={{
-                          height: 100,
-                          width: 'auto',
-                          verticalAlign: 'middle',
-                        }}
-                        src={
-                          pathToAsset(
-                            setting?.logo?.data?.attributes?.formats?.small?.url ??
-                              setting?.logo?.data?.attributes?.url,
-                          ) ?? ''
-                        }
-                        preview={false}
-                      />
-                      <span>{setting?.site_name ?? ''}</span>
-                    </Space>
+                    {setting?.site_name ?? ''}
                   </Typography.Title>
                 ) : (
                   <Typography.Title className="landing-heading fs-xs" level={2}>

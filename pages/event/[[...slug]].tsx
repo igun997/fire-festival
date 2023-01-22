@@ -1,5 +1,5 @@
 import { LayoutConfigWithNextPage } from '../../configs/layout.config';
-import { Button, Card, Col, Grid, Row, Typography } from 'antd';
+import { Button, Card, Col, Grid, Image, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getEventDetail } from '../../services/root';
@@ -48,12 +48,7 @@ const EventPage: LayoutConfigWithNextPage = (props: any) => {
       style={{
         padding: 24,
       }}>
-      <Col
-        xs={24}
-        md={{
-          span: 12,
-          offset: 6,
-        }}>
+      <Col xs={24}>
         <Row gutter={[10, 10]}>
           <Col
             xs={24}
@@ -81,6 +76,11 @@ const EventPage: LayoutConfigWithNextPage = (props: any) => {
           </Col>
           {pageData?.is_contact ? (
             <>
+              <Col xs={24}>
+                <Image
+                  src={selectSetting?.logo.data.attributes.url ?? ''}
+                />
+              </Col>
               <Col md={8} xs={24}>
                 <Card>
                   <Row gutter={[10, 10]}>

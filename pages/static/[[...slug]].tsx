@@ -57,12 +57,7 @@ const StaticPage: LayoutConfigWithNextPage = (props: any) => {
       style={{
         padding: 24,
       }}>
-      <Col
-        xs={24}
-        md={{
-          span: 12,
-          offset: 6,
-        }}>
+      <Col xs={24}>
         <Row gutter={[10, 10]}>
           <Col
             xs={24}
