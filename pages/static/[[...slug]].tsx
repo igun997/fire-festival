@@ -79,7 +79,13 @@ const StaticPage: LayoutConfigWithNextPage = (props: any) => {
             </Row>
           </Col>
           <Col xs={24}>
-            <Button type="link" icon={<LeftOutlined />} onClick={() => push('/')}>
+            <Button
+              type="link"
+              style={{
+                fontWeight: 700,
+              }}
+              icon={<LeftOutlined />}
+              onClick={() => push('/')}>
               Kembali
             </Button>
           </Col>
