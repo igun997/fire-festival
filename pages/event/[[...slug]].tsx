@@ -9,6 +9,7 @@ import { setLoading } from '../../redux/slices/setting';
 import style from './index.module.less';
 import { InstagramFilled, LeftOutlined, MailFilled, PhoneFilled } from '@ant-design/icons';
 import EventDetail from '../../components/Whitelabel/EventDetail';
+import { pathToAsset } from '../../utils/global.util';
 
 const { useBreakpoint } = Grid;
 const EventPage: LayoutConfigWithNextPage = (props: any) => {
@@ -70,15 +71,26 @@ const EventPage: LayoutConfigWithNextPage = (props: any) => {
             </Row>
           </Col>
           <Col xs={24}>
-            <Button type="link" icon={<LeftOutlined />} onClick={() => push('/static/festival')}>
+            <Button
+              type="link"
+              style={{
+                fontWeight: 700,
+              }}
+              icon={<LeftOutlined />}
+              onClick={() => push('/static/festival')}>
               Kembali
             </Button>
           </Col>
           {pageData?.is_contact ? (
             <>
-              <Col xs={24}>
+              <Col
+                xs={24}
+                style={{
+                  textAlign: 'center',
+                }}>
                 <Image
-                  src={selectSetting?.logo.data.attributes.url ?? ''}
+                  preview={false}
+                  src={pathToAsset(selectSetting?.logo.data.attributes.url) ?? ''}
                 />
               </Col>
               <Col md={8} xs={24}>

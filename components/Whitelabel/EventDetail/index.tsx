@@ -26,7 +26,7 @@ const DescLeftMedia: any = (props: EventDetailProps) => {
     <>
       <Col xs={24}>
         <Card>
-          <Row gutter={[10, 10]}>
+          <Row gutter={[20, 10]}>
             <Col xs={24} md={16}>
               {parse(props?.data?.description ?? '')}
             </Col>
@@ -62,7 +62,7 @@ const DescRightMedia: any = (props: EventDetailProps) => {
     <>
       <Col xs={24}>
         <Card>
-          <Row gutter={[10, 10]}>
+          <Row gutter={[20, 10]}>
             <Col xs={24} md={8}>
               <Image.PreviewGroup>
                 <Row gutter={[10, 10]}>
@@ -102,12 +102,14 @@ const DescTopMedia: any = (props: EventDetailProps) => {
             <Col xs={24}>{parse(props?.data?.description ?? '')}</Col>
             <Col xs={24}>
               <Image.PreviewGroup>
-                <Row gutter={[10, 10]}>
+                <Row gutter={[10, 10]} justify="space-between" align="middle">
                   {props?.data?.medias?.data?.map((item) =>
                     ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
                       <Col key={item.id}>
                         <Image
-                          style={{ height: 100 }}
+                          style={{
+                            maxHeight: 380,
+                          }}
                           src={pathToAsset(item.attributes.url) ?? ''}
                         />
                       </Col>
