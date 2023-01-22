@@ -12,6 +12,9 @@ export namespace RootResources {
         }[];
       };
       footer_text: string;
+      instagram_url: string;
+      email: string;
+      helpdesk: string;
       logo: {
         data: {
           id: number;

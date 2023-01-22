@@ -40,7 +40,11 @@ const EventsComponent = () => {
           renderItem={(item: RootResources.getListEvent.data) => (
             <List.Item>
               <List.Item.Meta
-                avatar={<Avatar src={pathToAsset(item?.icon?.data?.attributes?.url)} />}
+                avatar={
+                  item?.icon?.data?.attributes?.url ? (
+                    <Avatar src={pathToAsset(item?.icon?.data?.attributes?.url)} />
+                  ) : null
+                }
                 title={
                   <Link style={{ fontWeight: 700 }} href={`/event/${item.slug}`}>
                     {item.event_name}

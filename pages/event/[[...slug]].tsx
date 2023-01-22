@@ -1,17 +1,18 @@
 import { LayoutConfigWithNextPage } from '../../configs/layout.config';
-import { Button, Col, Grid, Row, Typography } from 'antd';
+import { Button, Card, Col, Grid, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getEventDetail } from '../../services/root';
 import { RootResources } from '../../types/services/root';
-import { useAppDispatch } from '../../configs/hooks.config';
+import { useAppDispatch, useAppSelector } from '../../configs/hooks.config';
 import { setLoading } from '../../redux/slices/setting';
 import style from './index.module.less';
-import { LeftOutlined } from '@ant-design/icons';
+import { InstagramFilled, LeftOutlined, MailFilled, PhoneFilled } from '@ant-design/icons';
 import EventDetail from '../../components/Whitelabel/EventDetail';
 
 const { useBreakpoint } = Grid;
 const EventPage: LayoutConfigWithNextPage = (props: any) => {
+  const selectSetting = useAppSelector((state) => state.setting.setting);
   const { xs } = useBreakpoint();
   const { push, query } = useRouter();
   const dispatch = useAppDispatch();
@@ -78,7 +79,99 @@ const EventPage: LayoutConfigWithNextPage = (props: any) => {
               Kembali
             </Button>
           </Col>
-          <EventDetail type={pageData?.event_info?.layout} data={pageData?.event_info} />
+          {pageData?.is_contact ? (
+            <>
+              <Col md={8} xs={24}>
+                <Card>
+                  <Row gutter={[10, 10]}>
+                    <Col
+                      xs={24}
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      <InstagramFilled
+                        style={{
+                          fontSize: 30,
+                          color: '#800000',
+                        }}
+                      />
+                    </Col>
+                    <Col
+                      xs={24}
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      <Typography.Link
+                        href={`https://www.instagram.com/${selectSetting?.instagram_url}`}
+                        className="landing-normal">
+                        {selectSetting?.instagram_url ?? '-'}
+                      </Typography.Link>
+                    </Col>
+                  </Row>
+                </Card>
+              </Col>
+              <Col md={8} xs={24}>
+                <Card>
+                  <Row gutter={[10, 10]}>
+                    <Col
+                      xs={24}
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      <MailFilled
+                        style={{
+                          fontSize: 30,
+                          color: '#800000',
+                        }}
+                      />
+                    </Col>
+                    <Col
+                      xs={24}
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      <Typography.Link
+                        href={`mailto:${selectSetting?.email}`}
+                        className="landing-normal">
+                        {selectSetting?.email ?? '-'}
+                      </Typography.Link>
+                    </Col>
+                  </Row>
+                </Card>
+              </Col>
+              <Col md={8} xs={24}>
+                <Card>
+                  <Row gutter={[10, 10]}>
+                    <Col
+                      xs={24}
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      <PhoneFilled
+                        style={{
+                          fontSize: 30,
+                          color: '#800000',
+                        }}
+                      />
+                    </Col>
+                    <Col
+                      xs={24}
+                      style={{
+                        textAlign: 'center',
+                      }}>
+                      <Typography.Link
+                        href={`tel:${selectSetting?.email}`}
+                        className="landing-normal">
+                        {selectSetting?.helpdesk ?? '-'}
+                      </Typography.Link>
+                    </Col>
+                  </Row>
+                </Card>
+              </Col>
+            </>
+          ) : (
+            <EventDetail type={pageData?.event_info?.layout} data={pageData?.event_info} />
+          )}
         </Row>
       </Col>
     </Row>
