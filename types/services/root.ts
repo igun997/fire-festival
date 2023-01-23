@@ -11,6 +11,12 @@ export namespace RootResources {
           attributes: Resources.MediaAttributes;
         }[];
       };
+      base_image: {
+        data: {
+          id: number;
+          attributes: Resources.MediaAttributes;
+        };
+      };
       footer_text: string;
       instagram_url: string;
       email: string;

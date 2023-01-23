@@ -1,5 +1,5 @@
 import { Col, Grid, Image, Layout, Row, Typography } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
 import { UpOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -9,13 +9,19 @@ import { addSetting, setLoading } from '../../redux/slices/setting';
 import OverlayLoaders from '../OverlayLoaders';
 import Head from 'next/head';
 import { pathToAsset } from '../../utils/global.util';
+import { useRouter } from 'next/router';
 
 const { useBreakpoint } = Grid;
 const { Content, Footer } = Layout;
 const BaseLayout: React.FC<any> = ({ children }) => {
   const { xs } = useBreakpoint();
   const selectSetting = useAppSelector((state) => state.setting);
+  const [defSetting, setDefSetting] = useState<boolean>(false);
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  const refetchSetting = () => {
+    setDefSetting(!defSetting);
+  };
   const loadSetting = () => {
     dispatch(setLoading(true));
     getSetting()
@@ -28,7 +34,20 @@ const BaseLayout: React.FC<any> = ({ children }) => {
   };
   useEffect(() => {
     loadSetting();
-  }, []);
+  }, [defSetting]);
+  useEffect(() => {
+    if (router.pathname === '/') {
+      refetchSetting();
+    }
+  }, [router.pathname]);
+  useEffect(() => {
+    if (selectSetting?.setting?.base_image?.data) {
+      const path = pathToAsset(selectSetting?.setting?.base_image?.data?.attributes?.url);
+      if (path) {
+        document.documentElement.style.setProperty('--bg-layout', `url(${path})`);
+      }
+    }
+  }, [selectSetting?.setting?.base_image?.data]);
   return (
     <OverlayLoaders active={selectSetting.loading}>
       <Head>
