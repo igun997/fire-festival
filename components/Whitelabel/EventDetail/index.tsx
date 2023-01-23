@@ -5,6 +5,27 @@ import parse from 'html-react-parser';
 import { pathToAsset } from '../../../utils/global.util';
 import ReactPlayer from 'react-player';
 
+import styled, { keyframes } from 'styled-components';
+import { slideInDown, slideInLeft, slideInRight, slideInUp } from 'react-animations';
+
+const slideInRightAnimation = keyframes`${slideInRight}`;
+const SlideInRightDiv = styled.div`
+  animation: 1s ${slideInRightAnimation};
+`;
+const slideInLeftAnimation = keyframes`${slideInLeft}`;
+const SlideInLeftDiv = styled.div`
+  animation: 1s ${slideInLeftAnimation};
+`;
+const slideInUpAnimation = keyframes`${slideInUp}`;
+const SlideInUpDiv = styled.div`
+  animation: 1s ${slideInUpAnimation};
+`;
+
+const slideInDownAnimation = keyframes`${slideInDown}`;
+const SlideInDownDiv = styled.div`
+  animation: 1s ${slideInDownAnimation};
+`;
+
 type EventDetailProps = {
   type?: string;
   data?: {
@@ -33,7 +54,7 @@ const DescLeftMedia: any = (props: EventDetailProps) => {
                 order: 1,
               }}
               md={16}>
-              {parse(props?.data?.description ?? '')}
+              <SlideInLeftDiv>{parse(props?.data?.description ?? '')}</SlideInLeftDiv>
             </Col>
             <Col
               xs={{
@@ -41,25 +62,27 @@ const DescLeftMedia: any = (props: EventDetailProps) => {
                 order: 2,
               }}
               md={8}>
-              <Image.PreviewGroup>
-                <Row gutter={[10, 10]}>
-                  {props?.data?.medias?.data?.map((item) =>
-                    ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
-                      <Col xs={24} key={item.id}>
-                        <Image src={pathToAsset(item.attributes.url) ?? ''} />
-                      </Col>
-                    ) : (
-                      <Col xs={24} key={item.id}>
-                        <ReactPlayer
-                          url={pathToAsset(item.attributes.url) ?? ''}
-                          width="100%"
-                          controls={true}
-                        />
-                      </Col>
-                    ),
-                  )}
-                </Row>
-              </Image.PreviewGroup>
+              <SlideInRightDiv>
+                <Image.PreviewGroup>
+                  <Row gutter={[10, 10]}>
+                    {props?.data?.medias?.data?.map((item) =>
+                      ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
+                        <Col xs={24} key={item.id}>
+                          <Image src={pathToAsset(item.attributes.url) ?? ''} />
+                        </Col>
+                      ) : (
+                        <Col xs={24} key={item.id}>
+                          <ReactPlayer
+                            url={pathToAsset(item.attributes.url) ?? ''}
+                            width="100%"
+                            controls={true}
+                          />
+                        </Col>
+                      ),
+                    )}
+                  </Row>
+                </Image.PreviewGroup>
+              </SlideInRightDiv>
             </Col>
           </Row>
         </Card>
@@ -79,25 +102,27 @@ const DescRightMedia: any = (props: EventDetailProps) => {
                 order: 2,
               }}
               md={8}>
-              <Image.PreviewGroup>
-                <Row gutter={[10, 10]}>
-                  {props?.data?.medias?.data?.map((item) =>
-                    ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
-                      <Col xs={24} key={item.id}>
-                        <Image src={pathToAsset(item.attributes.url) ?? ''} />
-                      </Col>
-                    ) : (
-                      <Col xs={24} key={item.id}>
-                        <ReactPlayer
-                          url={pathToAsset(item.attributes.url) ?? ''}
-                          width="100%"
-                          controls={true}
-                        />
-                      </Col>
-                    ),
-                  )}
-                </Row>
-              </Image.PreviewGroup>
+              <SlideInRightDiv>
+                <Image.PreviewGroup>
+                  <Row gutter={[10, 10]}>
+                    {props?.data?.medias?.data?.map((item) =>
+                      ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
+                        <Col xs={24} key={item.id}>
+                          <Image src={pathToAsset(item.attributes.url) ?? ''} />
+                        </Col>
+                      ) : (
+                        <Col xs={24} key={item.id}>
+                          <ReactPlayer
+                            url={pathToAsset(item.attributes.url) ?? ''}
+                            width="100%"
+                            controls={true}
+                          />
+                        </Col>
+                      ),
+                    )}
+                  </Row>
+                </Image.PreviewGroup>
+              </SlideInRightDiv>
             </Col>
             <Col
               xs={{
@@ -105,7 +130,7 @@ const DescRightMedia: any = (props: EventDetailProps) => {
                 order: 1,
               }}
               md={16}>
-              {parse(props?.data?.description ?? '')}
+              <SlideInLeftDiv>{parse(props?.data?.description ?? '')}</SlideInLeftDiv>
             </Col>
           </Row>
         </Card>
@@ -120,33 +145,35 @@ const DescTopMedia: any = (props: EventDetailProps) => {
         <Card>
           <Row gutter={[10, 10]}>
             <Col xs={24} order={1}>
-              {parse(props?.data?.description ?? '')}
+              <SlideInDownDiv>{parse(props?.data?.description ?? '')}</SlideInDownDiv>
             </Col>
             <Col xs={24} order={2}>
-              <Image.PreviewGroup>
-                <Row gutter={[10, 10]} justify="space-between" align="middle">
-                  {props?.data?.medias?.data?.map((item) =>
-                    ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
-                      <Col key={item.id}>
-                        <Image
-                          style={{
-                            maxHeight: 380,
-                          }}
-                          src={pathToAsset(item.attributes.url) ?? ''}
-                        />
-                      </Col>
-                    ) : (
-                      <Col key={item.id}>
-                        <ReactPlayer
-                          url={pathToAsset(item.attributes.url) ?? ''}
-                          width="100%"
-                          controls={true}
-                        />
-                      </Col>
-                    ),
-                  )}
-                </Row>
-              </Image.PreviewGroup>
+              <SlideInUpDiv>
+                <Image.PreviewGroup>
+                  <Row gutter={[10, 10]} justify="space-between" align="middle">
+                    {props?.data?.medias?.data?.map((item) =>
+                      ImageMimeType.includes(item?.attributes?.mime ?? '') ? (
+                        <Col key={item.id}>
+                          <Image
+                            style={{
+                              maxHeight: 380,
+                            }}
+                            src={pathToAsset(item.attributes.url) ?? ''}
+                          />
+                        </Col>
+                      ) : (
+                        <Col key={item.id}>
+                          <ReactPlayer
+                            url={pathToAsset(item.attributes.url) ?? ''}
+                            width="100%"
+                            controls={true}
+                          />
+                        </Col>
+                      ),
+                    )}
+                  </Row>
+                </Image.PreviewGroup>
+              </SlideInUpDiv>
             </Col>
           </Row>
         </Card>

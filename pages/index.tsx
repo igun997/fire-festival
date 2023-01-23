@@ -8,8 +8,24 @@ import { pathToAsset } from '../utils/global.util';
 import useLoading from '../components/useLoading';
 import { getListLanding } from '../services/root';
 import { RootResources } from '../types/services/root';
+import styled, { keyframes } from 'styled-components';
+import { bounce, slideInLeft } from 'react-animations';
 
+const bounceAnimation = keyframes`${bounce}`;
+const slideInLeftAnimation = keyframes`${slideInLeft}`;
 const { useBreakpoint } = Grid;
+
+const BouncyDiv = styled.div`
+  .ant-card:hover {
+    cursor: pointer;
+    animation: 1s ${bounceAnimation};
+  }
+`;
+
+const SlideInLeftDiv = styled.div`
+  animation: 1s ${slideInLeftAnimation};
+`;
+
 const Home: LayoutConfigWithNextPage = (props: any) => {
   const { xs } = useBreakpoint();
   const router = useRouter();
@@ -89,56 +105,60 @@ const Home: LayoutConfigWithNextPage = (props: any) => {
             style={{
               paddingTop: 20,
             }}>
-            <Row gutter={[10, 10]}>
-              {loadingLanding.loading ? (
-                <Col xs={24}>
-                  <Card loading={true} />
-                </Col>
-              ) : (
-                landingData.map((item, index) => (
-                  <Col xs={24} key={`${index}-col`} md={12}>
-                    <Card onClick={() => navigateTo(item.path, item.is_external)}>
-                      <Row gutter={[5, 5]}>
-                        <Col
-                          xs={24}
-                          style={{
-                            textAlign: 'center',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}>
-                          <Image
-                            src={pathToAsset(item?.site_logo?.data?.attributes?.url) ?? ''}
-                            style={{
-                              height: 80,
-                              width: 'auto',
-                            }}
-                            preview={false}
-                          />
-                        </Col>
-                        <Col
-                          xs={24}
-                          style={{
-                            textAlign: 'center',
-                          }}>
-                          <Typography.Text className="landing-title">
-                            {item?.title ?? ''}
-                          </Typography.Text>
-                        </Col>
-                        <Col
-                          xs={24}
-                          style={{
-                            textAlign: 'center',
-                          }}>
-                          <Typography.Text className="landing-desc">
-                            {item?.description ?? ''}
-                          </Typography.Text>
-                        </Col>
-                      </Row>
-                    </Card>
+            <SlideInLeftDiv>
+              <Row gutter={[10, 10]}>
+                {loadingLanding.loading ? (
+                  <Col xs={24}>
+                    <Card loading={true} />
                   </Col>
-                ))
-              )}
-            </Row>
+                ) : (
+                  landingData.map((item, index) => (
+                    <Col xs={24} key={`${index}-col`} md={12}>
+                      <BouncyDiv>
+                        <Card onClick={() => navigateTo(item.path, item.is_external)}>
+                          <Row gutter={[5, 5]}>
+                            <Col
+                              xs={24}
+                              style={{
+                                textAlign: 'center',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}>
+                              <Image
+                                src={pathToAsset(item?.site_logo?.data?.attributes?.url) ?? ''}
+                                style={{
+                                  height: 80,
+                                  width: 'auto',
+                                }}
+                                preview={false}
+                              />
+                            </Col>
+                            <Col
+                              xs={24}
+                              style={{
+                                textAlign: 'center',
+                              }}>
+                              <Typography.Text className="landing-title">
+                                {item?.title ?? ''}
+                              </Typography.Text>
+                            </Col>
+                            <Col
+                              xs={24}
+                              style={{
+                                textAlign: 'center',
+                              }}>
+                              <Typography.Text className="landing-desc">
+                                {item?.description ?? ''}
+                              </Typography.Text>
+                            </Col>
+                          </Row>
+                        </Card>
+                      </BouncyDiv>
+                    </Col>
+                  ))
+                )}
+              </Row>
+            </SlideInLeftDiv>
           </Col>
         </Row>
       </Col>

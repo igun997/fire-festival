@@ -6,6 +6,14 @@ import { getListEvent } from '../../../services/root';
 import { pathToAsset } from '../../../utils/global.util';
 import Link from 'next/link';
 import style from './index.module.less';
+import styled, { keyframes } from 'styled-components';
+
+import { slideInLeft } from 'react-animations';
+
+const slideInLeftAnimation = keyframes`${slideInLeft}`;
+const SlideInLeftDiv = styled.div`
+  animation: 1s ${slideInLeftAnimation};
+`;
 
 const EventsComponent = () => {
   const [data, setData] = React.useState<RootResources.getListEvent.data[]>([]);
@@ -38,20 +46,22 @@ const EventsComponent = () => {
             ),
           }}
           renderItem={(item: RootResources.getListEvent.data) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={
-                  item?.icon?.data?.attributes?.url ? (
-                    <Avatar src={pathToAsset(item?.icon?.data?.attributes?.url)} />
-                  ) : null
-                }
-                title={
-                  <Link style={{ fontWeight: 700 }} href={`/event/${item.slug}`}>
-                    {item.event_name}
-                  </Link>
-                }
-              />
-            </List.Item>
+            <SlideInLeftDiv>
+              <List.Item>
+                <List.Item.Meta
+                  avatar={
+                    item?.icon?.data?.attributes?.url ? (
+                      <Avatar src={pathToAsset(item?.icon?.data?.attributes?.url)} />
+                    ) : null
+                  }
+                  title={
+                    <Link style={{ fontWeight: 700 }} href={`/event/${item.slug}`}>
+                      {item.event_name}
+                    </Link>
+                  }
+                />
+              </List.Item>
+            </SlideInLeftDiv>
           )}
         />
       </Card>

@@ -99,6 +99,12 @@ export namespace RootResources {
           attributes: Resources.MediaAttributes;
         };
       };
+      featured_image: {
+        data: {
+          id: number;
+          attributes: Resources.MediaAttributes;
+        } | null;
+      };
       event_info: {
         id: number;
         title: string;
