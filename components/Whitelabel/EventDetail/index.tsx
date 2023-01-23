@@ -1,12 +1,14 @@
 import { Resources } from '../../../types/types';
 import React from 'react';
-import { Card, Col, Image, Row } from 'antd';
+import { Avatar, Card, Col, Image, List, Row, Typography } from 'antd';
 import parse from 'html-react-parser';
 import { pathToAsset } from '../../../utils/global.util';
 import ReactPlayer from 'react-player';
-
 import styled, { keyframes } from 'styled-components';
 import { slideInDown, slideInLeft, slideInRight, slideInUp } from 'react-animations';
+import { RootResources } from '../../../types/services/root';
+import style from './index.module.less';
+import { FileFilled, FileImageFilled, VideoCameraFilled } from '@ant-design/icons';
 
 const slideInRightAnimation = keyframes`${slideInRight}`;
 const SlideInRightDiv = styled.div`
@@ -28,6 +30,7 @@ const SlideInDownDiv = styled.div`
 
 type EventDetailProps = {
   type?: string;
+  pageProps: RootResources.getListEvent.data | null;
   data?: {
     id: number;
     title: string;
@@ -42,6 +45,68 @@ type EventDetailProps = {
   };
 };
 const ImageMimeType = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+const VideoMimeType = [
+  'video/mp4',
+  'video/avi',
+  'video/mov',
+  'video/mkv',
+  'video/ogg',
+  'video/webm',
+];
+const PickIconByMimeType = (mimeType: string) => {
+  if (ImageMimeType.includes(mimeType)) {
+    return (
+      <FileImageFilled
+        style={{
+          color: 'var(--primary-color-10)',
+        }}
+      />
+    );
+  } else if (VideoMimeType.includes(mimeType)) {
+    return (
+      <VideoCameraFilled
+        style={{
+          color: 'var(--primary-color-10)',
+        }}
+      />
+    );
+  }
+  return (
+    <FileFilled
+      style={{
+        color: 'var(--primary-color-10)',
+      }}
+    />
+  );
+};
+const DownloadableRender: any = (props: EventDetailProps) => {
+  return (
+    <div className={style.root} {...props}>
+      <List
+        header={<div>Downloadable Files</div>}
+        bordered
+        size="small"
+        locale={{ emptyText: 'No Downloadable Files' }}
+        dataSource={props?.pageProps?.downloadable_files}
+        renderItem={(item: any) => (
+          <List.Item>
+            <List.Item.Meta
+              avatar={<Avatar icon={PickIconByMimeType(item?.file?.data?.attributes?.mime)} />}
+              title={
+                <Typography.Link
+                  target={'_blank'}
+                  download={item.name}
+                  href={pathToAsset(item?.file?.data?.attributes?.url) ?? '#'}>
+                  {item.name}
+                </Typography.Link>
+              }
+            />
+          </List.Item>
+        )}
+      />
+    </div>
+  );
+};
 const DescLeftMedia: any = (props: EventDetailProps) => {
   return (
     <>
@@ -54,7 +119,25 @@ const DescLeftMedia: any = (props: EventDetailProps) => {
                 order: 1,
               }}
               md={16}>
-              <SlideInLeftDiv>{parse(props?.data?.description ?? '')}</SlideInLeftDiv>
+              <SlideInLeftDiv>
+                {props?.pageProps?.downloadable_component === 'top_right' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  />
+                )}
+                {parse(props?.data?.description ?? '')}
+                {props?.pageProps?.downloadable_component === 'bottom_desc' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  />
+                )}
+              </SlideInLeftDiv>
             </Col>
             <Col
               xs={{
@@ -63,6 +146,14 @@ const DescLeftMedia: any = (props: EventDetailProps) => {
               }}
               md={8}>
               <SlideInRightDiv>
+                {props?.pageProps?.downloadable_component === 'top_left' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginBottom: 10,
+                    }}
+                  />
+                )}
                 <Image.PreviewGroup>
                   <Row gutter={[10, 10]}>
                     {props?.data?.medias?.data?.map((item) =>
@@ -103,6 +194,14 @@ const DescRightMedia: any = (props: EventDetailProps) => {
               }}
               md={8}>
               <SlideInRightDiv>
+                {props?.pageProps?.downloadable_component === 'top_right' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginBottom: 10,
+                    }}
+                  />
+                )}
                 <Image.PreviewGroup>
                   <Row gutter={[10, 10]}>
                     {props?.data?.medias?.data?.map((item) =>
@@ -130,7 +229,25 @@ const DescRightMedia: any = (props: EventDetailProps) => {
                 order: 1,
               }}
               md={16}>
-              <SlideInLeftDiv>{parse(props?.data?.description ?? '')}</SlideInLeftDiv>
+              <SlideInLeftDiv>
+                {props?.pageProps?.downloadable_component === 'top_left' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  />
+                )}
+                {parse(props?.data?.description ?? '')}
+                {props?.pageProps?.downloadable_component === 'bottom_desc' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  />
+                )}
+              </SlideInLeftDiv>
             </Col>
           </Row>
         </Card>
@@ -145,7 +262,27 @@ const DescTopMedia: any = (props: EventDetailProps) => {
         <Card>
           <Row gutter={[10, 10]}>
             <Col xs={24} order={1}>
-              <SlideInDownDiv>{parse(props?.data?.description ?? '')}</SlideInDownDiv>
+              <SlideInDownDiv>
+                {props?.pageProps?.downloadable_component === 'top_desc' && (
+                  <DownloadableRender
+                    {...props}
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  />
+                )}
+                {parse(props?.data?.description ?? '')}
+                <div style={{ marginTop: 10 }}>
+                  {props?.pageProps?.downloadable_component === 'bottom_desc' && (
+                    <DownloadableRender
+                      {...props}
+                      style={{
+                        marginLeft: 40,
+                      }}
+                    />
+                  )}
+                </div>
+              </SlideInDownDiv>
             </Col>
             <Col xs={24} order={2}>
               <SlideInUpDiv>

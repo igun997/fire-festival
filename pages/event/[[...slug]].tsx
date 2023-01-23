@@ -205,7 +205,13 @@ const EventPage: LayoutConfigWithNextPage = (props: any) => {
               </FadeInDiv>
             </Col>
           ) : (
-            <EventDetail type={pageData?.event_info?.layout} data={pageData?.event_info} />
+            <div className={style.rootCkeditor}>
+              <EventDetail
+                type={pageData?.event_info?.layout}
+                pageProps={pageData}
+                data={pageData?.event_info}
+              />
+            </div>
           )}
         </Row>
       </Col>

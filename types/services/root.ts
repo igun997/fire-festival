@@ -93,6 +93,17 @@ export namespace RootResources {
       event_name: string;
       slug: string;
       is_contact: boolean;
+      downloadable_component: string | null;
+      downloadable_files: {
+        id: number;
+        name: string;
+        file: {
+          data: {
+            id: number;
+            attributes: Resources.MediaAttributes;
+          };
+        };
+      }[];
       icon: {
         data: {
           id: number;

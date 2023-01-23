@@ -29,7 +29,7 @@ export const getStaticPage = (slug: string) => {
 // events?populate=*
 
 export const getListEvent = () => {
-  return http.get('/events?populate=*').then((response) => {
+  return http.get('/events?populate=*&sort[0]=order:asc').then((response) => {
     return response.data as RootResources.getListEvent.response;
   });
 };
