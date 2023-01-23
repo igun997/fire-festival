@@ -27,10 +27,20 @@ const DescLeftMedia: any = (props: EventDetailProps) => {
       <Col xs={24}>
         <Card>
           <Row gutter={[20, 10]}>
-            <Col xs={24} md={16}>
+            <Col
+              xs={{
+                span: 24,
+                order: 1,
+              }}
+              md={16}>
               {parse(props?.data?.description ?? '')}
             </Col>
-            <Col xs={24} md={8}>
+            <Col
+              xs={{
+                span: 24,
+                order: 2,
+              }}
+              md={8}>
               <Image.PreviewGroup>
                 <Row gutter={[10, 10]}>
                   {props?.data?.medias?.data?.map((item) =>
@@ -63,7 +73,12 @@ const DescRightMedia: any = (props: EventDetailProps) => {
       <Col xs={24}>
         <Card>
           <Row gutter={[20, 10]}>
-            <Col xs={24} md={8}>
+            <Col
+              xs={{
+                span: 24,
+                order: 2,
+              }}
+              md={8}>
               <Image.PreviewGroup>
                 <Row gutter={[10, 10]}>
                   {props?.data?.medias?.data?.map((item) =>
@@ -84,7 +99,12 @@ const DescRightMedia: any = (props: EventDetailProps) => {
                 </Row>
               </Image.PreviewGroup>
             </Col>
-            <Col xs={24} md={16}>
+            <Col
+              xs={{
+                span: 24,
+                order: 1,
+              }}
+              md={16}>
               {parse(props?.data?.description ?? '')}
             </Col>
           </Row>
@@ -99,8 +119,10 @@ const DescTopMedia: any = (props: EventDetailProps) => {
       <Col xs={24}>
         <Card>
           <Row gutter={[10, 10]}>
-            <Col xs={24}>{parse(props?.data?.description ?? '')}</Col>
-            <Col xs={24}>
+            <Col xs={24} order={1}>
+              {parse(props?.data?.description ?? '')}
+            </Col>
+            <Col xs={24} order={2}>
               <Image.PreviewGroup>
                 <Row gutter={[10, 10]} justify="space-between" align="middle">
                   {props?.data?.medias?.data?.map((item) =>
