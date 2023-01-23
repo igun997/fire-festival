@@ -41,13 +41,13 @@ const BaseLayout: React.FC<any> = ({ children }) => {
     }
   }, [router.pathname]);
   useEffect(() => {
-    if (selectSetting?.setting?.base_image?.data) {
-      const path = pathToAsset(selectSetting?.setting?.base_image?.data?.attributes?.url);
+    if (selectSetting?.setting?.base_background?.data) {
+      const path = pathToAsset(selectSetting?.setting?.base_background?.data?.attributes?.url);
       if (path) {
         document.documentElement.style.setProperty('--bg-layout', `url(${path})`);
       }
     }
-  }, [selectSetting?.setting?.base_image?.data]);
+  }, [selectSetting?.setting?.base_background?.data]);
   return (
     <OverlayLoaders active={selectSetting.loading}>
       <Head>

@@ -11,7 +11,7 @@ export namespace RootResources {
           attributes: Resources.MediaAttributes;
         }[];
       };
-      base_image: {
+      base_background: {
         data: {
           id: number;
           attributes: Resources.MediaAttributes;
